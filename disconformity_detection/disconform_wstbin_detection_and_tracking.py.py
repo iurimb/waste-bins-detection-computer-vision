@@ -32,39 +32,13 @@ import math
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
-# Initializing a date and time 
-'''
-inicio = cronometro()
-# Seu código aqui
 
-
-#start = time.perf_counter()
-#print(start)
-
-#input(dt)
-
-while True: 
-    fim = cronometro()
-    time_delta = datetime.timedelta(seconds=fim-inicio) 
-    #print(time_delta)
-    #print(inicio)    
-    date_and_time_of_video = (date_and_time_of_video + time_delta)
-    #date_and_time_of_video = date_and_time_of_video + time_sec
-    print(date_and_time_of_video)
-#current_time_24hr = time.strftime("%H:%M:%S")
-#current_time#_12hr = time.strftime("%I:%M:%S %p")
-#current_date = time.strftime("%Y-%m-%d")
-'''
-#model = YOLO('best_new_bees.pt')
 ROOT = os.getcwd()
 annotator = sv.LineZoneAnnotator()
-#input(ROOT)
-#model = YOLO(r"C:\Users\imich\OneDrive\Documentos\Clutch\Abelhas\abelhas_chegando.pt")
-#model = YOLO("yolov8n.pt")
-#model = YOLO(r"C:\Users\noz\Documents\Clutch\RESIDUOS\LIXO1\best.pt")
-#model = YOLO(r"C:\Users\noz\Documents\Clutch\RESIDUOS\WEIGHTS\best1234.pt")
-model = YOLO(r"C:\Users\noz\Documents\Clutch\RESIDUOS\WEIGHTS\best_conf_desconf.pt")
-classes_dict = {0: 'lixeira-em-desconformidade', 1: 'lixeira-em-conformidade'}
+model_weights = "YOUR_MODEL_WEIGHTS_PATH"
+model = YOLO(model_weights)
+VID_TEST = 'YOUR_VIDEO_PATH'
+classes_dict = {0: 'disconformity', 1: 'conformity'}
 df_id_list = []
 df_start_frame_list = []
 df_end_frame_list = []
@@ -75,19 +49,10 @@ desconforme_images_id = []
 
 print(model.names)
 
-#model.names
-#model.names = {0: 'Abelha'}
-#input(model.names)
 
-#CCTV = os.path.join(ROOT, "rael_cctv.mp4")
-#CCTV2 = os.path.join(ROOT, "rael_CCTV_2.mp4")
-#input(CCTV)
 
-LIXO1 = r"C:\Users\noz\Documents\Clutch\RESIDUOS\LIXO1\lixo1.mp4"
-LIXO3 = r'C:\Users\noz\Documents\Clutch\RESIDUOS\LIXO3\lixo3.mp4'
-VID_TEST = r'C:\Users\noz\Documents\Clutch\RESIDUOS\LIXO4\Garbage Truck Curotto Can POV Garbage and Yardwaste.mp4'
-frames_generator = sv.get_video_frames_generator(VID_TEST, start = 55200, stride=10)#, start = 100)
-#frames_generator = sv.get_video_frames_generator(CCTV2, start = 0)
+frames_generator = sv.get_video_frames_generator(VID_TEST, start = 55200, stride=10)
+
 
 frame_counter = 0
 bounding_box_annotator = sv.BoxAnnotator()
@@ -105,7 +70,7 @@ tracker = sv.ByteTrack(track_activation_threshold=track_act_thresh, lost_track_b
 #input(fps)
  # choose codec according to format needed
 fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
-#video = cv2.VideoWriter('CONF_DESCONF_DEF2.mp4', fourcc, fps, (int(width), int(height)))
+#video = cv2.VideoWriter('CONF_DISCONF_DEF.mp4', fourcc, fps, (int(width), int(height)))
 heat_map_annotator = sv.HeatMapAnnotator()
 COLORS = sv.ColorPalette.DEFAULT
 length = int(vcap.get(cv2.CAP_PROP_FRAME_COUNT))
