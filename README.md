@@ -25,7 +25,7 @@ The dataset used for the entirety of this project is the video in "Source Video 
 - results: folder with a short video representing the output at a given situation. 
 - training_loop: script to train a yolo model for object detection.
 - Weights: trained model weights for detecting conform and disconform waste-bins. 
-- line_zone: Line_Zone code I use that contains a modified function for annotating info. You could substitute the original line_zone file with mine or only copy the modified method code into yours ("_annotate_anything_count"). Alternatevely, you can give it a different name and import it. 
+- line_zone: line_zone code I use that contains a modified function for annotating info. You could substitute the original line_zone file with mine or only copy the modified method code into yours ("_annotate_anything_count"). Alternatevely, you can give it a different name and import it. 
 
 ## About the task and its development
 
